@@ -11,11 +11,15 @@ namespace AB_Utility.FromSceneToEntityConverter
     {
         [SerializeField] protected T _component;
 
+        private int _entity;
+
+        public int Entity => _entity;
+        
         public override void Convert(EcsPackedEntityWithWorld entityWithWorld)
         {
-            if (entityWithWorld.Unpack(out var world, out var entity))
+            if (entityWithWorld.Unpack(out var world, out var _entity))
             {
-                ref var component = ref world.GetPool<T>().Add(entity);
+                ref var component = ref world.GetPool<T>().Add(_entity);
                 component = _component;
             }
         }
