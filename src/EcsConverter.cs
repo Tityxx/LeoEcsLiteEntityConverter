@@ -1,9 +1,6 @@
 ﻿using System;
-
 using Leopotam.EcsLite;
-
 using UnityEngine;
-
 using Object = UnityEngine.Object;
 
 namespace AB_Utility.FromSceneToEntityConverter
@@ -13,7 +10,7 @@ namespace AB_Utility.FromSceneToEntityConverter
         public static T InstantiateAndCreateEntity<T>
         (T original, Vector3 position, Quaternion rotation, Transform parent,
             EcsWorld world)
-            where T : UnityEngine.Object
+            where T : Object
         {
             var obj = Object.Instantiate(original, position, rotation, parent);
             ConvertObject(obj as GameObject, world);
@@ -22,7 +19,7 @@ namespace AB_Utility.FromSceneToEntityConverter
 
         public static T InstantiateAndCreateEntity<T>
             (T original, Vector3 position, Quaternion rotation, EcsWorld world)
-            where T : UnityEngine.Object
+            where T : Object
         {
             var obj = Object.Instantiate(original, position, rotation);
             ConvertObject(obj as GameObject, world);
@@ -31,7 +28,7 @@ namespace AB_Utility.FromSceneToEntityConverter
 
         public static T InstantiateAndCreateEntity<T>
             (T original, Transform parent, EcsWorld world, bool worldPositionStay)
-            where T : UnityEngine.Object
+            where T : Object
         {
             var obj = Object.Instantiate(original, parent, worldPositionStay);
             ConvertObject(obj as GameObject, world);
@@ -40,7 +37,7 @@ namespace AB_Utility.FromSceneToEntityConverter
 
         public static T InstantiateAndCreateEntity<T>
             (T original, Transform parent, EcsWorld world)
-            where T : UnityEngine.Object
+            where T : Object
         {
             var obj = Object.Instantiate(original, parent);
             ConvertObject(obj as GameObject, world);
@@ -49,7 +46,7 @@ namespace AB_Utility.FromSceneToEntityConverter
 
         public static T InstantiateAndCreateEntity<T>
             (T original, EcsWorld world)
-            where T : UnityEngine.Object
+            where T : Object
         {
             var obj = Object.Instantiate(original);
             ConvertObject(obj as GameObject, world);
@@ -61,6 +58,8 @@ namespace AB_Utility.FromSceneToEntityConverter
             var destroyAfterConversion = container.DestroyAfterConversion;
             var entity = world.NewEntity();
             var packedEntity = world.PackEntityWithWorld(entity);
+            container.SetEntity(entity);
+            container.SetWorld(world);
 
             for (int j = 0; j < container.Converters.Length; j++)
             {
@@ -69,13 +68,13 @@ namespace AB_Utility.FromSceneToEntityConverter
 
                 if (destroyAfterConversion)
                 {
-                    UnityEngine.Object.Destroy(converter);
+                    Object.Destroy(converter);
                 }
             }
 
             if (destroyAfterConversion)
             {
-                UnityEngine.Object.Destroy(container);
+                Object.Destroy(container);
             }
         }
 
