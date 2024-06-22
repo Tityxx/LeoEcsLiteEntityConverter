@@ -20,7 +20,7 @@ namespace AB_Utility.FromSceneToEntityConverter
         private void OnDestroy()
         {
             if (_deleteEntityOnDestroy)
-                _world.DelEntity(_entity);
+                _world?.DelEntity(_entity);
         }
 
         internal void GetConverters()

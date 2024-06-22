@@ -1,7 +1,7 @@
 {
   "name": "com.anbi.leoecslite.entityconverter",
   "author": "AndreyBirchenko",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "displayName": "Leo Ecs Lite Entity Converter",
   "description": "Leo Ecs Lite Entity Converter",
   "unity": "2020.3",
